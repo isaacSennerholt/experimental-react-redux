@@ -1,0 +1,45 @@
+{
+  "name": "web-client",
+  "version": "1.0.0",
+  "description": "Web client",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test-unit-all": "npm run test -- unit",
+    "test-int-all": "npm run test -- int --runInBand",
+    "start": "cross-env NODE_ENV=development node ./webpack-dev-server",
+    "build": "webpack --config webpack.prod",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node ./server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "create-crud-client": "^1.0.0",
+    "dotenv": "^5.0.1",
+    "formik": "^0.11.11",
+    "http-proxy-middleware": "^0.18.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "jest": "20.0.4",
+    "react-hot-loader": "^4.2.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.10.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
+  }
+}

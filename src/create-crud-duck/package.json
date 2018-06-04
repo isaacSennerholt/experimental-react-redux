@@ -1,0 +1,17 @@
+{
+  "name": "create-crud-duck",
+  "version": "1.0.0",
+  "description": "Create CRUD duck",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test-unit-all": "npm run test -- unit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "5.0.5",
+    "jest": "20.0.4"
+  },
+  "dependencies": {}
+}
