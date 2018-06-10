@@ -1,0 +1,10 @@
+@import '../styles/variables.css';
+
+.inputField {
+  display: inline-block;
+  padding: var(--spacingExtraSmall);
+  vertical-align: middle;
+  width: 100%;
+  border: 2px solid var(--colorLightGrey);
+  border-radius: 3px;
+}

@@ -2,20 +2,16 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
-
-import store from './store'
-
-import StartPageScene from './startPage/StartPageScene'
+import {BrowserRouter} from 'react-router-dom'
+import store from 'store.js'
+import AppComponent from 'AppComponent'
 
 function render() {
   ReactDom.render(
     <AppContainer>
       <Provider store={store}>
         <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={StartPageScene} />
-        </Switch>
+          <AppComponent />
         </BrowserRouter>
       </Provider>
     </AppContainer>,

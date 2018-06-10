@@ -1,0 +1,9 @@
+@import '../styles/variables.css';
+
+.fieldLabel {
+  display: block;
+  font-weight: bold;
+  font-size: var(--fontSizeDefault);
+  text-transform: capitalize;
+  margin-bottom: var(--spacingExtraSmall);
+}

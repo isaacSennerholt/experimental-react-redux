@@ -1,4 +1,7 @@
 
+const host = process.env.HOST
+const port = process.env.PORT
+
 const services = {
   serviceBusiness4b0c: {
     mountPath: process.env['4b0c_SERVICE_MOUNT_PATH'],
@@ -15,5 +18,7 @@ const services = {
 }
 
 module.exports = {
+  host,
+  port,
   services
 }

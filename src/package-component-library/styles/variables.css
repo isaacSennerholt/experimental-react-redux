@@ -1,0 +1,20 @@
+
+:root {
+  --colorLightGrey: #d0d0d0;
+  --colorMediumGrey: #848484;
+  --colorDarkGrey: #484848;
+  --colorLightBlue: #52bad5;
+
+  --spacingLarge: 3rem;
+  --spacingMedium: 1.125rem;
+  --spacingSmall: 1rem;
+  --spacingExtraSmall: 0.75rem;
+
+  --fontSizeExtraLarge: 2rem;
+  --fontSizeLarge: 1.625rem;
+  --fontSizeMedium: 1.25rem;
+  --fontSizeSmall: 0.875rem;
+  --fontSizeDefault: 1rem;
+
+  --fontFamilyGlobal: Arial, Helvetica, sans-serif;
+}

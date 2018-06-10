@@ -6,7 +6,7 @@ export function getReducers() {
   return {...reducers}
 }
 
-export function registerReducer(name, reducer) {
+export function mountReducer(name, reducer) {
   reducers = {...reducers, [name]: reducer}
   if (changeListener) changeListener(getReducers())
 }

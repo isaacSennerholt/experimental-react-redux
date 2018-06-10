@@ -1,0 +1,20 @@
+@import './styles/variables.css';
+
+.buttonDefault {
+  padding: var(--spacingSmall);
+  font-size: var(--fontSizeSmall);
+  background-color: var(--colorMediumGrey);
+  color: white;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.buttonPrimary {
+  background-color: var(--colorLightBlue);
+}
+
+.isDisabled {
+  pointer-events: none;
+  opacity: .25;   
+}

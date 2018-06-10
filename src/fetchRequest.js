@@ -1,3 +1,5 @@
+import config from 'config.js'
+const {host, port} = config
 
 export default function fetchRequest(endpoint, config) {
   const {body, headers} = config || {}
@@ -5,7 +7,7 @@ export default function fetchRequest(endpoint, config) {
   const configBody = jsonBody ? {body: jsonBody} : {}
   const configHeaders = {headers: {...headers, 'content-type': 'application/json'}}
   return fetch(
-    `http://localhost:8080${endpoint}`, 
+    `http://${host}:${port}${endpoint}`, 
     {...config, ...configHeaders, ...configBody})
     .then(response => {
       const {status} = response

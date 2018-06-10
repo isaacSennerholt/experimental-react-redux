@@ -1,6 +1,6 @@
 import reduxThunk from 'redux-thunk'
 import {combineReducers, createStore, applyMiddleware, compose} from 'redux'
-import {getReducers, setChangeListener} from './reducer-registry'
+import {getReducers, setChangeListener} from 'reducerRegistry.js'
 
 function getInitialState() {
   const authSession = localStorage.getItem('auth_session')

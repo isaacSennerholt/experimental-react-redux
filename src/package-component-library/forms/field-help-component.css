@@ -1,0 +1,8 @@
+@import '../styles/variables.css';
+
+.fieldHelp {
+  display: block;
+  color: var(--colorMediumGrey);
+  font-size: var(--fontSizeSmall);
+  margin-top: var(--spacingExtraSmall);
+}

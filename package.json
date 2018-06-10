@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.2.5",
     "create-crud-client": "^1.0.0",
     "dotenv": "^5.0.1",
     "formik": "^0.11.11",
@@ -25,7 +26,8 @@
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.25.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -33,9 +35,17 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "browser-sync": "^2.24.4",
     "cross-env": "^5.0.5",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "20.0.4",
+    "mini-css-extract-plugin": "^0.4.0",
+    "postcss-load-config": "^1.2.0",
+    "postcss-loader": "^2.1.5",
+    "postcss-preset-env": "^5.1.0",
     "react-hot-loader": "^4.2.0",
+    "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.10.1",
     "webpack-cli": "^2.1.4",

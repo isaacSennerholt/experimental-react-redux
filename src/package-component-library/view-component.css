@@ -1,0 +1,14 @@
+.viewDefault {
+  width: 100%;
+  max-width: 71.5rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.viewSmall {
+  max-width: 36rem;
+}
+
+.viewMedium {
+  max-width: 48rem;
+}
