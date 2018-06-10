@@ -11,7 +11,7 @@ function LoginPage() {
       <ViewComponent className='viewSmall'>
         <h1>Login</h1>
         <p>
-          Need a MailChimp account? <Link to='/signup'>Create an account</Link>
+          Need an account? <Link to='/signup'>Create an account</Link>
         </p>
         <UserLoginFormContainer initialValues={{email: '', password: ''}} />
       </ViewComponent>

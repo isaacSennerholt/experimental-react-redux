@@ -7,7 +7,7 @@ const proxy = require('http-proxy-middleware')
 const app = express()
 const port = parseInt(process.env.PORT, 10)
 const buildDirectory = path.resolve(__dirname, 'public')
-const {services} = require('./config.js')
+const {services} = require('./serverConfig.js')
 
 function mountProxies() {
   return Object.values(services).map(service => {

@@ -11,8 +11,8 @@ function LoginPage() {
       <ViewComponent className='viewSmall'>
         <h1>Get started with a free account</h1>
         <p>
-          Create a free Talea account to manage your modern affiliate marketing.
-          Already have a Talea account? <Link to='/login'>Log in here</Link>
+          Create a free account.
+          Already have an account? <Link to='/login'>Log in here</Link>
         </p>
         <UserSignUpFormContainer initialValues={{email: '', password: ''}} />
       </ViewComponent>

@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackDev = require('./webpack.dev.js')
 const port = parseInt(process.env.PORT, 10)
-const {services} = require('./config.js')
+const {services} = require('./serverConfig.js')
 
 const proxy = Object.values(services).reduce((proxy, service) => {
   const {mountPath, baseUrl} = service

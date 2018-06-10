@@ -4,7 +4,7 @@ import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
 import {BrowserRouter, Switch} from 'react-router-dom'
 import store from 'store.js'
-import appRouteComponents from 'appRouteComponents.js'
+import routeComponents from 'routeComponents.js'
 
 function render() {
   ReactDom.render(
@@ -12,7 +12,7 @@ function render() {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            {appRouteComponents}
+            {routeComponents}
           </Switch>
         </BrowserRouter>
       </Provider>
