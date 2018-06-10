@@ -2,21 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import * as yup from 'yup'
 
-export default (UserSignUpService, UserSignUpFormComponent) => {
+export default (UserLoginService, UserLoginFormComponent) => {
 
-  UserSignUpFormContainer.propTypes = {
+  UserLoginFormContainer.propTypes = {
     onSuccess: PropTypes.func,
     onFailure: PropTypes.func,
     initialValues: PropTypes.object
   }
   
-  UserSignUpFormContainer.defaultProps = {
+  UserLoginFormContainer.defaultProps = {
     onSuccess: () => {},
     onFailure: () => {},
     initialValues: {}
   }
 
-  function UserSignUpFormContainer({onSuccess, onFailure, initialValues}) {
+  function UserLoginFormContainer({onSuccess, onFailure, initialValues}) {
   
     const validationSchema = yup.object().shape({
       email: yup.string().email().required(),
@@ -29,9 +29,9 @@ export default (UserSignUpService, UserSignUpFormComponent) => {
   
     return (
       <div>
-        <UserSignUpService render={({userSignUp}) => (
-          <UserSignUpFormComponent 
-            onSubmit={userSignUp}
+        <UserLoginService render={({userLogin}) => (
+          <UserLoginFormComponent 
+            onSubmit={userLogin}
             onSuccess={onSuccess}
             onFailure={onFailure}
             initialValues={initialValues}
@@ -42,6 +42,6 @@ export default (UserSignUpService, UserSignUpFormComponent) => {
     
   }
   
-  return UserSignUpFormContainer
+  return UserLoginFormContainer
 
 }

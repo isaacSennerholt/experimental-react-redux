@@ -2,16 +2,18 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter, Switch} from 'react-router-dom'
 import store from 'store.js'
-import AppComponent from 'AppComponent'
+import appRouteComponents from 'appRouteComponents.js'
 
 function render() {
   ReactDom.render(
     <AppContainer>
       <Provider store={store}>
         <BrowserRouter>
-          <AppComponent />
+          <Switch>
+            {appRouteComponents}
+          </Switch>
         </BrowserRouter>
       </Provider>
     </AppContainer>,
