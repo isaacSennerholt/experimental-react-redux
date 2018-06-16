@@ -1,8 +1,8 @@
 import createCrudClient from 'create-crud-client'
 import fetchRequest from 'fetchRequest.js'
-import {createDuck, withSideEffects, extendDuck} from 'createCrudDuck.js'
+import {createDuck, withSideEffects} from 'createCrudDuck.js'
 
-export default (duckName, namespace = 'XXX', {token, mountReducer, extensions} = {}) => {
+export default (duckName, namespace = 'XXX', {token, mountReducer} = {}) => {
 
   const authorizationHeader = token ? {authorization: `Bearer ${token}`} : {}
 
@@ -11,18 +11,10 @@ export default (duckName, namespace = 'XXX', {token, mountReducer, extensions} =
   })
 
   const duck = withSideEffects(createDuck(namespace, duckName), crudClient)
+  const {reducer} = duck
 
-  if (Array.isArray(extensions) && extensions.length) {
-    return extensions.reduce((extendedDuck, extension) => {
-      return extendDuck(extendedDuck, extension)
-    }, duck)
-  }
+  if (mountReducer) mountReducer(duckName, reducer)
 
-  if (mountReducer) {
-    const {reducer} = duck
-    mountReducer(duckName, reducer)
-  }
-
-  return {...duck}
+  return {name: duckName, ...duck}
 
 }

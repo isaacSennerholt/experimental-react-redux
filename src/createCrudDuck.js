@@ -1,29 +1,26 @@
-import deepmerge from 'deepmerge'
-import reduceReducers from 'reduce-reducers'
+export function createDuck(namespace, resourceName) {
+  const namespaceLc = namespace.toLowerCase()
+  const resourceNameLc = resourceName.toLowerCase()
 
-export function createDuck(namespace, duckName) {
-  const normalizedNamespace = namespace.toLowerCase()
-  const normalizedDuckName = duckName.toLowerCase()
-
-  const GET_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/GET_REQUEST`
-  const GET_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/GET_SUCCESS`
-  const GET_ERROR = `${normalizedNamespace}/${normalizedDuckName}/GET_ERROR`
+  const GET_REQUEST = `${namespaceLc}/${resourceNameLc}/GET_REQUEST`
+  const GET_SUCCESS = `${namespaceLc}/${resourceNameLc}/GET_SUCCESS`
+  const GET_ERROR = `${namespaceLc}/${resourceNameLc}/GET_ERROR`
   
-  const POST_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/POST_REQUEST`
-  const POST_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/POST_SUCCESS`
-  const POST_ERROR = `${normalizedNamespace}/${normalizedDuckName}/POST_ERROR`
+  const POST_REQUEST = `${namespaceLc}/${resourceNameLc}/POST_REQUEST`
+  const POST_SUCCESS = `${namespaceLc}/${resourceNameLc}/POST_SUCCESS`
+  const POST_ERROR = `${namespaceLc}/${resourceNameLc}/POST_ERROR`
   
-  const PUT_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/PUT_REQUEST`
-  const PUT_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/PUT_SUCCESS`
-  const PUT_ERROR = `${normalizedNamespace}/${normalizedDuckName}/PUT_ERROR`
+  const PUT_REQUEST = `${namespaceLc}/${resourceNameLc}/PUT_REQUEST`
+  const PUT_SUCCESS = `${namespaceLc}/${resourceNameLc}/PUT_SUCCESS`
+  const PUT_ERROR = `${namespaceLc}/${resourceNameLc}/PUT_ERROR`
   
-  const PATCH_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/PATCH_REQUEST`
-  const PATCH_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/PATCH_SUCCESS`
-  const PATCH_ERROR = `${normalizedNamespace}/${normalizedDuckName}/PATCH_ERROR`
+  const PATCH_REQUEST = `${namespaceLc}/${resourceNameLc}/PATCH_REQUEST`
+  const PATCH_SUCCESS = `${namespaceLc}/${resourceNameLc}/PATCH_SUCCESS`
+  const PATCH_ERROR = `${namespaceLc}/${resourceNameLc}/PATCH_ERROR`
   
-  const DELETE_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/DELETE_REQUEST`
-  const DELETE_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/DELETE_SUCCESS`
-  const DELETE_ERROR = `${normalizedNamespace}/${normalizedDuckName}/DELETE_ERROR`
+  const DELETE_REQUEST = `${namespaceLc}/${resourceNameLc}/DELETE_REQUEST`
+  const DELETE_SUCCESS = `${namespaceLc}/${resourceNameLc}/DELETE_SUCCESS`
+  const DELETE_ERROR = `${namespaceLc}/${resourceNameLc}/DELETE_ERROR`
   
   function reducer(state = {}, {type, payload} = {}) {
     const isBulk = Array.isArray(payload) && !!payload.length
@@ -51,8 +48,7 @@ export function createDuck(namespace, duckName) {
           }
           return items
         }, {})
-      default:
-        return state
+      default: return state
     }
   }
   
@@ -75,13 +71,12 @@ export function createDuck(namespace, duckName) {
   }
   
   return {
-    name: normalizedDuckName,
     reducer,
     actionCreators
   }
 }
 
-export function withSideEffects(duck = {}, crudClient = {}) {
+export function withSideEffects(duck, crudClient) {
   const {actionCreators} = duck
   const crudMethodNames = Object.keys(crudClient)
   const thunks = crudMethodNames.reduce((thunks, crudMethodName) => {
@@ -106,18 +101,4 @@ export function withSideEffects(duck = {}, crudClient = {}) {
   }, {})
 
   return {...duck, thunks}
-}
-
-export function extendDuck(duck = {}, extension = {}) {
-  const {reducer: reducerExtension} = extension
-  let extendedDuckReducer = {}
-
-  if (reducerExtension) {
-    const {reducer: initialReducer} = duck
-    const reducers = [initialReducer, reducerExtension]
-    const extendedReducer = reduceReducers(...reducers)
-    extendedDuckReducer = {reducer: extendedReducer}
-  }
-  
-  return deepmerge.all([extension, duck, extendedDuckReducer])
 }
