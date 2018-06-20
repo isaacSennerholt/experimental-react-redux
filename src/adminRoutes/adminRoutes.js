@@ -3,7 +3,7 @@ import AdminRouteComponent from './AdminRouteComponent.js'
 import AdminPage from './AdminPage.js'
 
 export default [{
-  RouteComponent: AdminRouteComponent,
+  routeComponent: AdminRouteComponent,
   exact: true,
   path: '/admin',
   component: AdminPage

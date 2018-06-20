@@ -1,7 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import FieldHelpComponent from './FieldHelpComponent.js'
 import FieldLabelComponent from './FieldLabelComponent.js'
 import styles from './input-component.css'
+
+InputComponent.propTypes = {
+  field: PropTypes.object.isRequired,
+  touched: PropTypes.object,
+  errors: PropTypes.object
+}
+
+InputComponent.defaultProps = {
+  touched: {},
+  errors: {}
+}
 
 function InputComponent({
   field,

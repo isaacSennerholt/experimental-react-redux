@@ -10,7 +10,7 @@ const routes = [
 ]
 
 const routeComponents = routes.map((route, key) => {
-  const {RouteComponent, ...props} = route
+  const {routeComponent: RouteComponent, ...props} = route
   return <RouteComponent {...props} key={key} />
 })
 

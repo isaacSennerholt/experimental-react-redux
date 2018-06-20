@@ -1,5 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './field-label-component.css'
+
+FieldLabelComponent.propTypes = {
+  name: PropTypes.string
+}
+
+FieldLabelComponent.defaultProps = {
+  name: ''
+}
 
 function FieldLabelComponent({name}) {
   return (

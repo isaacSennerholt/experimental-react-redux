@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-export default ({thunks}, apiMountPath) => {
+export default (apiMountPath, {thunks} = {}) => {
 
   function UserSignUpService({post, render}) {
 

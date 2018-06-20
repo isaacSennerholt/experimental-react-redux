@@ -1,0 +1,16 @@
+@import './variables.css';
+
+.sectionDefault {
+  margin-top: var(--spacingSmall);
+  margin-bottom: var(--spacingSmall);
+}
+
+.sectionMedium {
+  margin-top: var(--spacingMedium);
+  margin-bottom: var(--spacingMedium);
+}
+
+.sectionLarge {
+  margin-top: var(--spacingLarge);
+  margin-bottom: var(--spacingLarge);
+}

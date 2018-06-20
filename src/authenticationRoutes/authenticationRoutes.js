@@ -4,12 +4,12 @@ import LoginPage from './LoginPage.js'
 import SignUpPage from './SignUpPage.js'
 
 export default [{
-  RouteComponent: AuthenticationRouteComponent,
+  routeComponent: AuthenticationRouteComponent,
   exact: true,
   path: '/login',
   component: LoginPage
 }, {
-  RouteComponent: AuthenticationRouteComponent,
+  routeComponent: AuthenticationRouteComponent,
   exact: true,
   path: '/signup',
   component: SignUpPage

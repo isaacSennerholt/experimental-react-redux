@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom'
 import StartPage from './StartPage.js'
 
 export default [{
-  RouteComponent: Route,
+  routeComponent: Route,
   exact: true,
   path: '/',
   component: StartPage

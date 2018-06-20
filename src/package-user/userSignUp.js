@@ -2,12 +2,11 @@ import instUserSignUpService from './userSignUpService.js'
 import instUserSignUpFormComponent from './userSignUpFormComponent.js'
 import instUserSignUpFormContainer from './userSignUpFormContainer.js'
 
+export default (apiMountPath = '/api', packageDuck, componentLibrary, authPackage) => {
 
-export default (duck = {}, apiMountPath = '/api', componentLibrary = {}) => {
-
-  const UserSignUpService = instUserSignUpService(duck, apiMountPath)
+  const UserSignUpService = instUserSignUpService(apiMountPath, packageDuck)
   const UserSignUpFormComponent = instUserSignUpFormComponent(componentLibrary)
-  const UserSignUpFormContainer = instUserSignUpFormContainer(UserSignUpService, UserSignUpFormComponent)
+  const UserSignUpFormContainer = instUserSignUpFormContainer(UserSignUpService, UserSignUpFormComponent, authPackage)
 
   return {
     UserSignUpService,

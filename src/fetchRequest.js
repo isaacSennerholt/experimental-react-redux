@@ -1,16 +1,26 @@
 import clientConfig from 'clientConfig.js'
 const {host, port} = clientConfig
 
-export default function fetchRequest(endpoint, httpConfig) {
-  const {body, headers} = httpConfig || {}
+export default function fetchRequest(endpoint, {method = 'GET', headers = {}, body} = {}) {
+
+  const authSessionString = localStorage.getItem('auth_session')
+  const {token} = typeof authSessionString === 'string' ? JSON.parse(authSessionString) : {}
+  
+  const authorizationHeader = token ? {authorization: `Bearer ${token}`} : {}
+  const httpConfigHeaders = {headers: {...headers, ...authorizationHeader, 'content-type': 'application/json'}}
+
   const jsonBody = JSON.stringify(body) || null
   const httpConfigBody = jsonBody ? {body: jsonBody} : {}
-  const httpConfigHeaders = {headers: {...headers, 'content-type': 'application/json'}}
+  
   return fetch(
     `http://${host}:${port}${endpoint}`, 
-    {...httpConfig, ...httpConfigHeaders, ...httpConfigBody})
+    {method, ...httpConfigHeaders, ...httpConfigBody})
     .then(response => {
       const {status} = response
-      return {status, body: response.json()}
+      return response.json()
+        .then(body => {
+          return {status, body}
+        })
     })
+    
 }

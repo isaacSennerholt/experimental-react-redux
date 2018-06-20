@@ -14,7 +14,7 @@ function LoginPage() {
           Create a free account.
           Already have an account? <Link to='/login'>Log in here</Link>
         </p>
-        <UserSignUpFormContainer initialValues={{email: '', password: ''}} />
+        <UserSignUpFormContainer />
       </ViewComponent>
     </div>
   )

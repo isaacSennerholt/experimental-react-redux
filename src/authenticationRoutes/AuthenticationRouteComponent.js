@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Route} from 'react-router-dom'
-import {userPackage, componentLibraryPackage} from 'packages.js'
+import {authPackage, componentLibraryPackage} from 'packages.js'
 
-const {ducks: {auth_sessions}} = userPackage
-const {OnEnterRouteComponent} = componentLibraryPackage
+const {LatestAuthSessionService} = authPackage
+const {RedirectRouteComponent} = componentLibraryPackage
 
 AuthenticationRouteComponent.propTypes = {
   path: PropTypes.string.isRequired,
@@ -13,19 +12,23 @@ AuthenticationRouteComponent.propTypes = {
 
 function AuthenticationRouteComponent({path, component, ...props}) {
   
-  function validateAuthSession() {
-    const {selectors: {getLatestAuthSession}} = auth_sessions
-    return getLatestAuthSession()
+  function redirectTo({active} = {}) {
+    return active ? '/admin' : null
   }
 
   return (
-    <OnEnterRouteComponent
-      {...props}
-      path={path}
-      component={component}
-      onEnter={validateAuthSession}
-    />
+    <LatestAuthSessionService render={({latestAuthSession}) => {
+      return (
+        <RedirectRouteComponent
+          {...props}
+          path={path}
+          component={component}
+          to={redirectTo(latestAuthSession)}
+        />
+      )
+    }} />
   )
+
 }
 
 export default AuthenticationRouteComponent

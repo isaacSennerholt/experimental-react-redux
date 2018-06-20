@@ -1,29 +1,25 @@
 import createPackageDuck from 'createPackageDuck.js'
-import instUserSignUp from './userSignUp/userSignUp.js'
-import instUserLogin from './userLogin/userLogin.js'
-import authSessionSelectorExtension from './authSessionSelectorExtension.js'
+import instUserSignUp from './userSignUp.js'
 
-export default (namespace, apiConfig = {}, componentLibrary, {mountReducer} = {}) => {
-  const {mountPath, token} = apiConfig
+export default (
+  namespace,
+  {mountPath} = {},
+  componentLibrary,
+  authPackage,
+  {requestModule, mountReducer} = {}
+) => {
   
-  const userDuck = createPackageDuck('users', namespace, {token, mountReducer})
-  const userSignUp = instUserSignUp(userDuck, mountPath, componentLibrary)
-
-  const authSessionDuck = 
-    createPackageDuck('auth_sessions', namespace, {
-      token,
-      mountReducer,
-      extensions: [authSessionSelectorExtension]
+  const packageDuck = 
+    createPackageDuck('users', namespace, {
+      requestModule,
+      mountReducer
     })
   
-  const userLogin = instUserLogin(authSessionDuck, mountPath, componentLibrary)
+  const userSignUp = instUserSignUp(mountPath, packageDuck, componentLibrary, authPackage)
   
   return {
     ...userSignUp,
-    ...userLogin,
-    ducks: {
-      [userDuck.name]: userDuck,
-      [authSessionDuck.name]: authSessionDuck
-    }
+    ...packageDuck
   }
+  
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Route} from 'react-router-dom'
-import {componentLibraryPackage} from 'packages.js'
+import {authPackage, componentLibraryPackage} from 'packages.js'
 
-const {OnEnterRouteComponent} = componentLibraryPackage
+const {LatestAuthSessionService} = authPackage
+const {RedirectRouteComponent} = componentLibraryPackage
 
 AdminRouteComponent.propTypes = {
   path: PropTypes.string.isRequired,
@@ -12,19 +12,21 @@ AdminRouteComponent.propTypes = {
 
 function AdminRouteComponent({path, component, ...props}) {
   
-  function validateAdminUser() {
-    console.log('=========================')
-    console.log('Do some admin checks and validations!')
-    console.log('=========================')
+  function redirectTo({active} = {}) {
+    return active ? null : '/login'
   }
 
   return (
-    <OnEnterRouteComponent
-      {...props}
-      path={path}
-      component={component}
-      onEnter={validateAdminUser}
-    />
+    <LatestAuthSessionService render={({latestAuthSession}) => {
+      return (
+        <RedirectRouteComponent
+          {...props}
+          path={path}
+          component={component}
+          to={redirectTo(latestAuthSession)}
+        />
+      )
+    }} />
   )
 }
 

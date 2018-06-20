@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 
-OnEnterRouteComponent.propTypes = {
+RedirectRouteComponent.propTypes = {
   path: PropTypes.string.isRequired,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
-  onEnter: PropTypes.func.isRequired
+  to: PropTypes.string
 }
 
-function OnEnterRouteComponent({path, component: Component, onEnter, ...props}) {
+function RedirectRouteComponent({path, component: Component, to, ...props}) {
 
   function render() {
-    onEnter()
-    return <Component />
+    return to ? <Redirect to={to} /> : <Component />
   }
 
   return (
@@ -20,4 +19,4 @@ function OnEnterRouteComponent({path, component: Component, onEnter, ...props}) 
   )
 }
 
-export default OnEnterRouteComponent
+export default RedirectRouteComponent

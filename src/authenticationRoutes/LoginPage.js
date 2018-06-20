@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {userPackage, componentLibraryPackage} from 'packages.js'
+import {authPackage, componentLibraryPackage} from 'packages.js'
 
 const {ViewComponent} = componentLibraryPackage
-const {UserLoginFormContainer} = userPackage
+const {UserLoginFormContainer} = authPackage
 
 function LoginPage() {
   return (
@@ -13,7 +13,7 @@ function LoginPage() {
         <p>
           Need an account? <Link to='/signup'>Create an account</Link>
         </p>
-        <UserLoginFormContainer initialValues={{email: '', password: ''}} />
+        <UserLoginFormContainer />
       </ViewComponent>
     </div>
   )

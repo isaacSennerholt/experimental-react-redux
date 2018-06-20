@@ -2,43 +2,34 @@ import deepmerge from 'deepmerge'
 import reduceReducers from 'reduce-reducers'
 
 export function createDuck(namespace, duckName) {
+  const methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+  const phases = ['REQUEST', 'SUCCESS', 'ERROR']
   const normalizedNamespace = namespace.toLowerCase()
   const normalizedDuckName = duckName.toLowerCase()
 
-  const GET_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/GET_REQUEST`
-  const GET_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/GET_SUCCESS`
-  const GET_ERROR = `${normalizedNamespace}/${normalizedDuckName}/GET_ERROR`
-  
-  const POST_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/POST_REQUEST`
-  const POST_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/POST_SUCCESS`
-  const POST_ERROR = `${normalizedNamespace}/${normalizedDuckName}/POST_ERROR`
-  
-  const PUT_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/PUT_REQUEST`
-  const PUT_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/PUT_SUCCESS`
-  const PUT_ERROR = `${normalizedNamespace}/${normalizedDuckName}/PUT_ERROR`
-  
-  const PATCH_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/PATCH_REQUEST`
-  const PATCH_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/PATCH_SUCCESS`
-  const PATCH_ERROR = `${normalizedNamespace}/${normalizedDuckName}/PATCH_ERROR`
-  
-  const DELETE_REQUEST = `${normalizedNamespace}/${normalizedDuckName}/DELETE_REQUEST`
-  const DELETE_SUCCESS = `${normalizedNamespace}/${normalizedDuckName}/DELETE_SUCCESS`
-  const DELETE_ERROR = `${normalizedNamespace}/${normalizedDuckName}/DELETE_ERROR`
+  const actionTypes = methods.reduce((actionTypes, method) => {
+    return phases.reduce((newActionTypes, phase) => {
+      const actionType = `${method}_${phase}`
+      const value = `${normalizedNamespace}/${normalizedDuckName}/${actionType}`
+      newActionTypes[actionType] = value
+      return newActionTypes
+    }, actionTypes)
+  }, {})
   
   function reducer(state = {}, {type, payload} = {}) {
     const isBulk = Array.isArray(payload) && !!payload.length
     const ids = isBulk ? payload.map(({id}) => id) : []
     switch (type) {
-      case GET_SUCCESS:
-      case POST_SUCCESS:
-      case PUT_SUCCESS:
-      case PATCH_SUCCESS:
+      case actionTypes['GET_SUCCESS']:
+      case actionTypes['POST_SUCCESS']:
+      case actionTypes['PUT_SUCCESS']:
+      case actionTypes['PATCH_SUCCESS']:
         if (!isBulk) return {...state, [payload.id]: payload}
         return {...state, ...payload.reduce((items, item) => {
           items[item.id] = item
           return items
         }, {})}
-      case DELETE_SUCCESS:
+      case actionTypes['DELETE_SUCCESS']:
         if (!isBulk) {
           return Object.keys(state).reduce((items, stateItemId) => {
             if (stateItemId != payload.id) items[stateItemId] = state[stateItemId]
@@ -55,24 +46,24 @@ export function createDuck(namespace, duckName) {
         return state
     }
   }
-  
-  const actionCreators = {
-    getRequest: () => ({type: GET_REQUEST}),
-    getSuccess: payload => ({type: GET_SUCCESS, payload}),
-    getError: error => ({type: GET_ERROR, error}),
-    postRequest: payload => ({type: POST_REQUEST, payload}),
-    postSuccess: payload => ({type: POST_SUCCESS, payload}),
-    postError: error => ({type: POST_ERROR, error}),
-    putRequest: payload => ({type: PUT_REQUEST, payload}),
-    putSuccess: payload => ({type: PUT_SUCCESS, payload}),
-    putError: error => ({type: PUT_ERROR, error}),
-    patchRequest: payload => ({type: PATCH_REQUEST, payload}),
-    patchSuccess: payload => ({type: PATCH_SUCCESS, payload}),
-    patchError: error => ({type: PATCH_ERROR, error}),
-    deleteRequest: payload => ({type: DELETE_REQUEST, payload}),
-    deleteSuccess: payload => ({type: DELETE_SUCCESS, payload}),
-    deleteError: error => ({type: DELETE_ERROR, error})
-  }
+
+  const actionCreators = Object.keys(actionTypes)
+    .reduce((actionCreators, actionType) => {
+      const actionCreator = actionType
+        .replace('_', ' ')
+        .toLowerCase()
+        .replace(/\W+(.)/g, (undefined, character) => {
+          return character.toUpperCase()
+        })
+      
+      actionCreators[actionCreator] = payload => {
+        let value = {type: actionTypes[actionType]}
+        if (payload) value = {...value, payload}
+        return value
+      }
+
+      return actionCreators
+    }, {})
   
   return {
     name: normalizedDuckName,

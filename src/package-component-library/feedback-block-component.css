@@ -1,0 +1,28 @@
+@import './variables.css';
+
+.feedbackBlockDefault {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--spacingExtraSmall);
+  font-size: var(--fontSizeSmall);
+  background-color: var(--colorLightGrey);
+  border-radius: 3px;
+}
+
+.feedbackBlockImage {
+  margin-right: var(--spacingExtraSmall);
+  width: 1.5rem;
+}
+
+.feedbackBlockImage img {
+  vertical-align: middle;
+}
+
+.feedbackBlockTextBody {
+  font-size: var(--fontSizeDefault);
+}
+
+.feedbackBlockError {
+  background-color: var(--colorLightRed);
+}

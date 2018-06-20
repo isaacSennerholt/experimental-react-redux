@@ -11,6 +11,6 @@ export function mountReducer(name, reducer) {
   if (changeListener) changeListener(getReducers())
 }
 
-export function setChangeListener(Listener) {
-  changeListener = Listener
+export function setChangeListener(listener) {
+  changeListener = listener
 }
