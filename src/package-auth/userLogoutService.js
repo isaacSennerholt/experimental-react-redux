@@ -8,11 +8,13 @@ export default (apiMountPath, {thunks, selectors} = {}) => {
 
   UserLogoutService.propTypes = {
     render: PropTypes.func.isRequired,
-    patch: PropTypes.func
+    patch: PropTypes.func,
+    latestAuthSession: PropTypes.object
   }
   
   UserLogoutService.defaultProps = {
-    patch: () => {}
+    patch: () => {},
+    latestAuthSession: {}
   }
 
   function UserLogoutService({patch, latestAuthSession, render}) {
