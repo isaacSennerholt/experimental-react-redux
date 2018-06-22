@@ -1,6 +1,6 @@
 const dotenv = require('dotenv')
 dotenv.load()
- 
+
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackDev = require('./webpack.dev.js')
@@ -20,7 +20,7 @@ const server = new WebpackDevServer(webpack(webpackDev), {
   historyApiFallback: true,
   proxy
 })
- 
+
 server.listen(port, 'localhost', error => {
   if (error) return console.log(error)
   console.log(`🐝  Web-client-server humming on localhost:${port}`)

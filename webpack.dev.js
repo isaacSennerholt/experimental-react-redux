@@ -2,8 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const webpackShared = require('./webpack.shared.js')
-const port = parseInt(process.env.port, 10)
- 
+const port = parseInt(process.env.PORT, 10)
+
 module.exports = merge(webpackShared, {
   mode: 'development',
   devtool: 'eval-source-map',
