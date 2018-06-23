@@ -1,25 +1,30 @@
 import fetchRequest from 'fetchRequest.js'
 import {mountReducer} from 'reducerRegistry.js'
 import clientConfig from 'clientConfig.js'
-import instPackageUser from 'package-user/package-user.js'
-import instPackageAuth from 'package-auth/package-auth.js'
+import selectorExtensionUtilities from 'selectorExtensionUtilities.js'
 import packageComponentLibrary from 'package-component-library/package-component-library.js'
+import instPackageUser from 'package-user/package-user.js'
+import instPackageAuthentication from 'package-authentication/package-authentication.js'
 
 const {services: {serviceUser0d7a}} = clientConfig
 
 export const componentLibraryPackage = packageComponentLibrary
 
-export const authPackage = instPackageAuth(
+export const authenticationPackage = instPackageAuthentication(
   'web-client',
   serviceUser0d7a,
   componentLibraryPackage,
-  {requestModule: fetchRequest, mountReducer}
+  {
+    requestModule: fetchRequest,
+    mountReducer,
+    duckExtensions: [selectorExtensionUtilities]
+  }
 )
 
 export const userPackage = instPackageUser(
   'web-client',
   serviceUser0d7a,
   componentLibraryPackage,
-  authPackage,
+  authenticationPackage,
   {requestModule: fetchRequest, mountReducer}
 )

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {authPackage, componentLibraryPackage} from 'packages.js'
+import {componentLibraryPackage, authenticationPackage} from 'packages.js'
 
-const {LatestAuthSessionService} = authPackage
 const {RedirectRouteComponent} = componentLibraryPackage
+const {AuthenticationService} = authenticationPackage
 
 AuthenticationRouteComponent.propTypes = {
   path: PropTypes.string.isRequired,
@@ -11,19 +11,19 @@ AuthenticationRouteComponent.propTypes = {
 }
 
 function AuthenticationRouteComponent({path, component, ...props}) {
-  
+
   function redirectTo({active} = {}) {
     return active ? '/admin' : null
   }
 
   return (
-    <LatestAuthSessionService render={({latestAuthSession}) => {
+    <AuthenticationService render={({authenticationSession}) => {
       return (
         <RedirectRouteComponent
           {...props}
           path={path}
           component={component}
-          to={redirectTo(latestAuthSession)}
+          to={redirectTo(authenticationSession)}
         />
       )
     }} />

@@ -10,8 +10,8 @@ const routes = [
 ]
 
 const routeComponents = routes.map((route, key) => {
-  const {routeComponent: RouteComponent, ...props} = route
-  return <RouteComponent {...props} key={key} />
+  const {routeComponent: RouteComponent, ...routeConfigProps} = route
+  return <RouteComponent {...routeConfigProps} key={key} />
 })
 
 export default routeComponents

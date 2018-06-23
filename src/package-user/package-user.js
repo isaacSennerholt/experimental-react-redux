@@ -1,25 +1,37 @@
 import createPackageDuck from 'createPackageDuck.js'
-import instUserSignUp from './userSignUp.js'
+import instUserService from './userService.js'
+import instUserSignUpFormComponent from './userSignUpFormComponent.js'
+import instUserSignUpFormContainer from './userSignUpFormContainer.js'
 
 export default (
   namespace,
   {mountPath} = {},
   componentLibrary,
-  authPackage,
+  authenticationPackage,
   {requestModule, mountReducer} = {}
 ) => {
-  
-  const packageDuck = 
-    createPackageDuck('users', namespace, {
-      requestModule,
-      mountReducer
-    })
-  
-  const userSignUp = instUserSignUp(mountPath, packageDuck, componentLibrary, authPackage)
-  
+
+  const packageDuck =
+    createPackageDuck('users', namespace, {requestModule, mountReducer})
+
+  const UserService =
+    instUserService(mountPath, packageDuck)
+
+  const UserSignUpFormComponent =
+    instUserSignUpFormComponent(componentLibrary)
+
+  const UserSignUpFormContainer =
+    instUserSignUpFormContainer(
+      UserService,
+      UserSignUpFormComponent,
+      authenticationPackage
+    )
+
   return {
-    ...userSignUp,
+    instUserService,
+    UserSignUpFormComponent,
+    UserSignUpFormContainer,
     ...packageDuck
   }
-  
+
 }

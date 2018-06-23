@@ -8,15 +8,15 @@ OnEnterRouteComponent.propTypes = {
   onEnter: PropTypes.func.isRequired
 }
 
-function OnEnterRouteComponent({path, component: Component, onEnter, ...props}) {
+function OnEnterRouteComponent({path, component: Component, onEnter, ...routeConfigProps}) {
 
-  function render() {
+  function render(reactRouterProps) {
     onEnter()
-    return <Component />
+    return <Component {...reactRouterProps} />
   }
 
   return (
-    <Route {...props} path={path} render={render} />
+    <Route {...routeConfigProps} path={path} render={render} />
   )
 }
 

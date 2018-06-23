@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import * as yup from 'yup'
 
-export default (UserLoginService, UserLoginFormComponent) => {
+export default function(AuthenticationService, UserLoginFormComponent) {
 
   class UserLoginFormContainer extends Component {
 
@@ -24,11 +24,14 @@ export default (UserLoginService, UserLoginFormComponent) => {
 
       return (
         <div>
-          <UserLoginService render={({userLogin, setLocalStorage}) => {
+          <AuthenticationService render={({
+            createAuthenticationSession,
+            setLocalStorage
+          }) => {
             return (
               <div>
-                <UserLoginFormComponent 
-                  onSubmit={userLogin}
+                <UserLoginFormComponent
+                  onSubmit={createAuthenticationSession}
                   onSuccess={setLocalStorage}
                   onFailure={setStateOnFailure}
                   initialValues={{email: '', password: ''}}
@@ -40,9 +43,9 @@ export default (UserLoginService, UserLoginFormComponent) => {
         </div>
       )
     }
-    
+
   }
-  
+
   return UserLoginFormContainer
 
 }

@@ -1,33 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {authPackage, componentLibraryPackage} from 'packages.js'
+import {componentLibraryPackage, authenticationPackage} from 'packages.js'
 
-const {LatestAuthSessionService} = authPackage
 const {RedirectRouteComponent} = componentLibraryPackage
+const {AuthenticationService} = authenticationPackage
 
 AdminRouteComponent.propTypes = {
   path: PropTypes.string.isRequired,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
 }
 
-function AdminRouteComponent({path, component, ...props}) {
-  
+export default function AdminRouteComponent({
+  path,
+  component,
+  ...routeConfigProps
+}) {
+
   function redirectTo({active} = {}) {
     return active ? null : '/login'
   }
 
   return (
-    <LatestAuthSessionService render={({latestAuthSession}) => {
+    <AuthenticationService render={({authenticationSession}) => {
       return (
         <RedirectRouteComponent
-          {...props}
+          {...routeConfigProps}
           path={path}
           component={component}
-          to={redirectTo(latestAuthSession)}
+          to={redirectTo(authenticationSession)}
         />
       )
     }} />
   )
 }
-
-export default AdminRouteComponent

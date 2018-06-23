@@ -5,6 +5,11 @@ export default duckName => {
     return store[duckName] || {}
   }
 
+  function getItemById(store, id) {
+    const items = getResourceFromStore(store)
+    return items[id] || {}
+  }
+
   function getLatestItemByCreationDate(store) {
     const items = getResourceFromStore(store)
     return Object.values(items).sort((itemA, itemB) => {
@@ -15,6 +20,7 @@ export default duckName => {
 
   const selectors = {
     getResourceFromStore,
+    getItemById,
     getLatestItemByCreationDate
   }
 

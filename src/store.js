@@ -4,16 +4,25 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
 import {getReducers, setChangeListener} from 'reducerRegistry.js'
 
 function getInitialState() {
-  const authSessionString = localStorage.getItem('auth_session')
-  const authSession = typeof authSessionString === 'string' ? JSON.parse(authSessionString) : null
-  const authSessionState = authSession ? {auth_sessions: {[authSession.id]: authSession}} : {}
-  return {...authSessionState}
+  const authenticationSessionString = localStorage.getItem('authentication_session')
+
+  const authenticationSession =
+    typeof authenticationSessionString === 'string' ?
+    JSON.parse(authenticationSessionString) : null
+
+  const authenticationSessionState =
+    authenticationSession ?
+    {authentication_sessions: {
+      [authenticationSession.id]: authenticationSession
+    }} : {}
+
+  return {...authenticationSessionState}
 }
 
 const initialState = getInitialState()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const middlewares = 
+const middlewares =
   process.env.NODE_ENV === 'development' ?
   [reduxThunk, reduxImmutableStateInvariant()] :
   [reduxThunk]
@@ -46,4 +55,3 @@ setChangeListener(reducers => {
 })
 
 export default store
-

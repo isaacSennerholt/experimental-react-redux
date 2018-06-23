@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {userPackage, componentLibraryPackage} from 'packages.js'
+import {componentLibraryPackage, userPackage} from 'packages.js'
 
 const {ViewComponent} = componentLibraryPackage
 const {UserSignUpFormContainer} = userPackage

@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Field} from 'formik'
 
-export default ({
+export default function({
   FormContainer,
   FieldGroupComponent,
   InputComponent,
   ButtonComponent,
   SectionComponent,
   FeedbackBlockComponent
-} = {}) => {
+} = {}) {
 
   UserLoginFormComponent.propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -19,7 +19,7 @@ export default ({
     onFailure: PropTypes.func,
     apiError: PropTypes.object
   }
-  
+
   UserLoginFormComponent.defaultProps = {
     initialValues: {},
     validationSchema: {},
@@ -28,7 +28,14 @@ export default ({
     apiError: {}
   }
 
-  function UserLoginFormComponent({onSubmit, initialValues, validationSchema, onSuccess, onFailure, apiError}) {
+  function UserLoginFormComponent({
+    onSubmit,
+    initialValues,
+    validationSchema,
+    onSuccess,
+    onFailure,
+    apiError
+  }) {
 
     function renderFeedbackBlock() {
       const {status} = apiError
@@ -69,7 +76,7 @@ export default ({
                 <FieldGroupComponent>
                   <Field type='password' name='password' component={InputComponent} />
                 </FieldGroupComponent>
-                <ButtonComponent 
+                <ButtonComponent
                   type='submit'
                   disabled={isSubmitting || !isValid}
                   className='buttonPrimary'>
@@ -83,5 +90,5 @@ export default ({
   }
 
   return UserLoginFormComponent
-  
+
 }

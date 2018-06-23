@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {authPackage, componentLibraryPackage} from 'packages.js'
+import {componentLibraryPackage, authenticationPackage} from 'packages.js'
 
 const {ViewComponent} = componentLibraryPackage
-const {UserLoginFormContainer} = authPackage
+const {UserLoginFormContainer} = authenticationPackage
 
 function LoginPage() {
   return (

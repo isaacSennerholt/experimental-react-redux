@@ -8,14 +8,14 @@ RedirectRouteComponent.propTypes = {
   to: PropTypes.string
 }
 
-function RedirectRouteComponent({path, component: Component, to, ...props}) {
+function RedirectRouteComponent({path, component: Component, to, ...routeConfigProps}) {
 
-  function render() {
-    return to ? <Redirect to={to} /> : <Component />
+  function render(reactRouterProps) {
+    return to ? <Redirect to={to} /> : <Component {...reactRouterProps} />
   }
 
   return (
-    <Route {...props} path={path} render={render} />
+    <Route {...routeConfigProps} path={path} render={render} />
   )
 }
 
