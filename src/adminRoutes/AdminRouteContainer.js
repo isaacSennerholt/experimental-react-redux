@@ -5,12 +5,12 @@ import {componentLibraryPackage, authenticationPackage} from 'packages.js'
 const {RedirectRouteComponent} = componentLibraryPackage
 const {AuthenticationService} = authenticationPackage
 
-AdminRouteComponent.propTypes = {
+AdminRouteContainer.propTypes = {
   path: PropTypes.string.isRequired,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
 }
 
-export default function AdminRouteComponent({
+export default function AdminRouteContainer({
   path,
   component,
   ...routeConfigProps

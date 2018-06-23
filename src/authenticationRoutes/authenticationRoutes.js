@@ -1,15 +1,15 @@
 import React from 'react'
-import AuthenticationRouteComponent from './AuthenticationRouteComponent.js'
+import AuthenticationRouteContainer from './AuthenticationRouteContainer.js'
 import LoginPage from './LoginPage.js'
 import SignUpPage from './SignUpPage.js'
 
 export default [{
-  routeComponent: AuthenticationRouteComponent,
+  routeComponent: AuthenticationRouteContainer,
   exact: true,
   path: '/login',
   component: LoginPage
 }, {
-  routeComponent: AuthenticationRouteComponent,
+  routeComponent: AuthenticationRouteContainer,
   exact: true,
   path: '/signup',
   component: SignUpPage

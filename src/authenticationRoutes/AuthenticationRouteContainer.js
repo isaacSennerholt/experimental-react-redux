@@ -5,12 +5,12 @@ import {componentLibraryPackage, authenticationPackage} from 'packages.js'
 const {RedirectRouteComponent} = componentLibraryPackage
 const {AuthenticationService} = authenticationPackage
 
-AuthenticationRouteComponent.propTypes = {
+AuthenticationRouteContainer.propTypes = {
   path: PropTypes.string.isRequired,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
 }
 
-function AuthenticationRouteComponent({path, component, ...props}) {
+function AuthenticationRouteContainer({path, component, ...props}) {
 
   function redirectTo({active} = {}) {
     return active ? '/admin' : null
@@ -31,4 +31,4 @@ function AuthenticationRouteComponent({path, component, ...props}) {
 
 }
 
-export default AuthenticationRouteComponent
+export default AuthenticationRouteContainer
