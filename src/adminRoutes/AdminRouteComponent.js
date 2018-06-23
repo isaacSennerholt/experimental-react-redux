@@ -21,13 +21,13 @@ export default function AdminRouteComponent({
   }
 
   return (
-    <AuthenticationService render={({authenticationSession}) => {
+    <AuthenticationService render={({getAuthenticationSession}) => {
       return (
         <RedirectRouteComponent
           {...routeConfigProps}
           path={path}
           component={component}
-          to={redirectTo(authenticationSession)}
+          to={redirectTo(getAuthenticationSession())}
         />
       )
     }} />

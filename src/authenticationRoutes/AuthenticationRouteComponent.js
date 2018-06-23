@@ -17,13 +17,13 @@ function AuthenticationRouteComponent({path, component, ...props}) {
   }
 
   return (
-    <AuthenticationService render={({authenticationSession}) => {
+    <AuthenticationService render={({getAuthenticationSession}) => {
       return (
         <RedirectRouteComponent
           {...props}
           path={path}
           component={component}
-          to={redirectTo(authenticationSession)}
+          to={redirectTo(getAuthenticationSession())}
         />
       )
     }} />

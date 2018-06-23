@@ -21,6 +21,10 @@ export default function(mountPath, {selectors, thunks} = {}) {
 
   function AuthenticationService({post, patch, authenticationSession, render}) {
 
+    function getAuthenticationSession() {
+      return authenticationSession
+    }
+
     function createAuthenticationSession(payload) {
       const url = `${mountPath}/users/self/authentication-sessions`
       return post(url, payload)
@@ -43,7 +47,7 @@ export default function(mountPath, {selectors, thunks} = {}) {
     }
 
     return render({
-      authenticationSession,
+      getAuthenticationSession,
       createAuthenticationSession,
       updateAuthenticationSession,
       setLocalStorage,
