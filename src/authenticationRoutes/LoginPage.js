@@ -5,7 +5,7 @@ import {componentLibraryPackage, authenticationPackage} from 'packages.js'
 const {ViewComponent} = componentLibraryPackage
 const {UserLoginFormContainer} = authenticationPackage
 
-function LoginPage() {
+export default function() {
   return (
     <div>
       <ViewComponent className='viewSmall'>
@@ -18,5 +18,3 @@ function LoginPage() {
     </div>
   )
 }
-
-export default LoginPage

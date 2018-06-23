@@ -4,7 +4,7 @@ import {componentLibraryPackage} from 'packages.js'
 
 const {ViewComponent} = componentLibraryPackage
 
-function StartPage() {
+export default function() {
   return (
     <div>
       <ViewComponent className='viewSmall'>
@@ -14,5 +14,3 @@ function StartPage() {
     </div>
   )
 }
-
-export default StartPage
